@@ -57,7 +57,7 @@ router.get("/reset/:id/:token",async(req,res,next)=>{
         console.log(process.env.KEY);//working
         console.log(ENCRYPTION_KEY);//why not working 
         const encryptedId=  crypto.AES.encrypt(id, process.env.KEY).toString();
-        res.redirect(`http://localhost:3000/newpassword?data=${encodeURIComponent(encryptedId)}`);
+        res.redirect(`https://lnm-q-zeta.vercel.app/newpassword?data=${encodeURIComponent(encryptedId)}`);
     }catch (error){
         res.send(error);
     }
