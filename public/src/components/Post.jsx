@@ -37,8 +37,6 @@ export default function Post() {
   const [currUserId, setCurrUserId] = useState(null);
   const [currUsername, setCurrUsername] = useState(null);
   const [isliked, setisliked] = useState(false);
-  const [isfilter, setisfilter] = useState(false);
-  const [resetFilter, setresetFilter] = useState(false);
   const toastOptions = {
     position: "bottom-right",
     autoClose: 4000,
@@ -46,7 +44,6 @@ export default function Post() {
     draggable: true,
     theme: "dark",
   };
-
   useEffect(() => {
     const GetPosts = async () => {
       axios
@@ -69,7 +66,7 @@ export default function Post() {
       setCurrUserId(userId);
       setCurrUsername(username);
     }
-  }, [resetFilter]);
+  }, []);
 
   const handleLike = async (postId) => {
     try {
@@ -95,9 +92,6 @@ export default function Post() {
   const handleUsernameClick = (userId) => {
     navigate("/profile", { state: { userId: userId } });
   };
-  const handleFilter = () => {
-    setisfilter(!isfilter);
-  };
 
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
@@ -106,14 +100,13 @@ export default function Post() {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showButton, setShowButton] = useState(false);
 
   return (
     <div className="App">
       <div className="bg-white">
         <header className="sticky inset-x-0 top-0 z-50">
           <nav
-            className="flex items-center justify-between p-6 lg:px-8 "
+            className="flex items-center justify-between p-4 lg:px-8 border-gray-200 bg-[#F9EFF9] drop-shadow-md"
             aria-label="Global"
           >
             <div className="flex lg:flex-1 gap-x-12">
@@ -121,19 +114,18 @@ export default function Post() {
                 <span className="sr-only">LNM-Q</span>
                 <img className="h-10 w-auto" src={logo} alt="" />
               </button>
-              {/* <div className={`${!showButton ? "hidden" : ""} justify-start`}> */}
-
-              <div
-              // className="rounded-md bg-blue-400 border-2 border-gr"
-              >
-                <Sorting posts={posts} setPosts={setPosts} username={false} />
+              <div>
+                <Sorting
+                  className="-mx-3 block rounded-lg px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  posts={posts}
+                  setPosts={setPosts}
+                  username={false}
+                />
               </div>
               <div>
                 <Filter
+                  className="-mx-3 block rounded-lg px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   setPosts={setPosts}
-                  setresetFilter={setresetFilter}
-                  resetFilter={resetFilter}
-                  // className="hidden lg:block"
                 />
               </div>
               <NavPostDialog
@@ -143,15 +135,6 @@ export default function Post() {
                 currUsername={currUsername}
               />
             </div>
-
-            {/* <div className={`${!showButton ? "hidden" : ""}`}>
-              <PostDialog
-                posts={posts}
-                setPosts={setPosts}
-                currUserId={currUserId}
-                currUsername={currUsername}
-              />
-            </div> */}
             <div className="flex lg:hidden">
               <button
                 type="button"
@@ -164,14 +147,14 @@ export default function Post() {
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-12">
               <button
-                className="text-sm font-semibold leading-6 text-gray-900 "
+                className="-mx-3 block rounded-lg px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 onClick={() => handleUsernameClick(currUserId)}
               >
                 My Profile
               </button>
               <button
                 href="#"
-                className="text-sm font-semibold leading-6 text-gray-900"
+                className="-mx-3 block rounded-lg px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >
                 <Logout />
               </button>
@@ -188,11 +171,7 @@ export default function Post() {
               <div className="flex items-center justify-between">
                 <button href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">LNM-Q</span>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt=""
-                  />
+                  <img className="h-8 w-auto" src={logo} alt="" />
                 </button>
                 <button
                   type="button"
@@ -212,20 +191,6 @@ export default function Post() {
                     >
                       My Profile
                     </button>
-                    {/* <div>
-                      <Sorting
-                        posts={posts}
-                        setPosts={setPosts}
-                        username={false}
-                      />
-                    </div>
-                    <div>
-                      <Filter
-                        setPosts={setPosts}
-                        setresetFilter={setresetFilter}
-                        resetFilter={resetFilter}
-                      />
-                    </div> */}
                   </div>
                   <div className="py-6">
                     <button
@@ -266,11 +231,16 @@ export default function Post() {
               alt="Placeholder"
               className="layer bg-image hidden lg:block lg:absolute -z-20 right-0"
             />
-            <div className="layer mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 z-10000 lg:relative">
+            <div className="layer mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 z-50 lg:relative">
               <div className="text-center">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  LNM-Q
-                </h1>
+                <h1 className="group font-thunder tracking-wide text-8xl text-transparent bg-clip-text bg-[#5B3DD2] drop-shadow-md hover:drop-shadow-xl transition duration-150 hover:ease-in">
+                  LNM-
+                  <h1 className="font-thunderit tracking-wide text-8xl text-transparent inline-block bg-clip-text pr-3 bg-[#5B3DD2] transition duration-150 group-hover:bg-gradient-to-r group-hover:from-[#5B3DD2] group-hover:to-[#EB993D] group-hover:ease-in ">
+                    Q
+                  </h1>
+                  .
+                </h1>{" "}
+                <br />
                 <PostDialog
                   posts={posts}
                   setPosts={setPosts}
@@ -278,21 +248,6 @@ export default function Post() {
                   currUsername={currUsername}
                 />
                 <div className="mt-10 flex items-center justify-center gap-x-6 ">
-                  <div>
-                    <Sorting
-                      posts={posts}
-                      setPosts={setPosts}
-                      username={false}
-                      className="z-1000"
-                    />
-                  </div>
-                  <div>
-                    <Filter
-                      setPosts={setPosts}
-                      setresetFilter={setresetFilter}
-                      resetFilter={resetFilter}
-                    />
-                  </div>
                   <button
                     href="#"
                     onClick={handleClick}
@@ -309,21 +264,7 @@ export default function Post() {
               </div>
             </div>
           </div>
-          {/* <button
-            className="w-full p-3 bg-[#1E75D5] text-white rounded-md inline mx-[30px]"
-            onClick={handleFilter}
-          >
-            Filter Posts
-          </button>
-          {isfilter && (
-            <Filter
-              setPosts={setPosts}
-              setresetFilter={setresetFilter}
-              resetFilter={resetFilter}
-            />
-          )} */}
-          {/* <div className="snap-container"> */}
-          <ul ref={ref} className="lg:grid lg:grid-cols-2 lg:gap-4">
+          <ul ref={ref} className="z-100 lg:grid lg:grid-cols-2 lg:gap-4">
             {posts &&
               posts.map((post) => (
                 <li key={post._id}>

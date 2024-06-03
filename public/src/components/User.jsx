@@ -9,14 +9,11 @@ import "../css/post.css";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import img1 from "../assets/41656138_327153188042489_2142840811958576807_n.jpg";
-// import img2 from "../assets/img2.png";
-// import img3 from "../assets/img3.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -25,6 +22,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { MdAttachFile } from "react-icons/md";
+import { BiMessageAdd } from "react-icons/bi";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { useRef } from "react";
 import logo from "../assets/Removal-689.png";
@@ -88,14 +86,13 @@ export default function User({ userId }) {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showButton, setShowButton] = useState(false);
 
   return (
     <div className="App">
       <div className="bg-white">
         <header className="sticky inset-x-0 top-0 z-50">
           <nav
-            className="flex items-center justify-between p-6 lg:px-8"
+            className="flex items-center justify-between p-4 lg:px-8 border-gray-200 bg-[#F9EFF9] drop-shadow-md"
             aria-label="Global"
           >
             <div className="flex lg:flex-1 gap-x-12">
@@ -103,11 +100,9 @@ export default function User({ userId }) {
                 <span className="sr-only">LNM-Q</span>
                 <img className="h-10 w-auto" src={logo} alt="" />
               </button>
-              {/* <div className={`${!showButton ? "hidden" : ""} justify-start`}> */}
               <div className="block">
                 <Sorting posts={posts} setPosts={setPosts} username={true} />
               </div>
-              {/* </div> */}
             </div>
             <div className="flex lg:hidden">
               <button
@@ -120,16 +115,18 @@ export default function User({ userId }) {
               </button>
             </div>
             <div className="hidden lg:flex lg:justify-end lg:gap-x-12">
-              <button
-                href="#"
-                className="text-sm font-semibold leading-6 text-gray-900"
+              <Link
+                to="/posts"
+                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >
-                <Link to="/posts">Home</Link>
-              </button>
+                <button className="-mx-3 block rounded-lg px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  Home
+                </button>
+              </Link>
 
               <button
                 href="#"
-                className="text-sm font-semibold leading-6 text-gray-900"
+                className="-mx-3 block rounded-lg px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >
                 <Logout />
               </button>
@@ -146,11 +143,7 @@ export default function User({ userId }) {
               <div className="flex items-center justify-between">
                 <button href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">LNM-Q</span>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt=""
-                  />
+                  <img className="h-8 w-auto" src={logo} alt="" />
                 </button>
                 <button
                   type="button"
@@ -167,13 +160,6 @@ export default function User({ userId }) {
                     <button className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                       <Link to="/posts">Home</Link>
                     </button>
-                    {/* <div>
-                      <Sorting
-                        posts={posts}
-                        setPosts={setPosts}
-                        username={false}
-                      />
-                    </div> */}
                   </div>
                   <div className="py-6">
                     <button
@@ -204,11 +190,7 @@ export default function User({ userId }) {
                 />
               </div>
 
-              <div className="lg:grid lg:grid-cols-2 content relative h-[82vh] snap-start">
-                {/* <animated.div
-                  style={springProps1}
-                  className="bg-image hidden lg:block lg:absolute lg:-z-1"
-                > */}
+              <div className="-z-20 lg:grid lg:grid-cols-2 content relative h-[82vh] snap-start">
                 <div className=" hidden lg:flex lg:justify-center lg:items-center">
                   <img
                     src={img1}
@@ -217,17 +199,6 @@ export default function User({ userId }) {
                   />
                 </div>
 
-                {/* </animated.div> */}
-                {/* <animated.div
-                  style={springProps2}
-                  className="bg-image hidden lg:block lg:absolute lg:-z-1 right-0"
-                > */}
-                {/* <img
-                  src={img2}
-                  alt="Placeholder"
-                  className="bg-image hidden lg:block lg:absolute -z-20 right-0"
-                /> */}
-                {/* </animated.div> */}
                 <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 z-100 ">
                   <div className="text-center">
                     {currUserId === userId ? (
@@ -249,14 +220,6 @@ export default function User({ userId }) {
                       Branch: {user.branch}
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-x-6 ">
-                      <div>
-                        <Sorting
-                          posts={posts}
-                          setPosts={setPosts}
-                          username={true}
-                        />
-                      </div>
-
                       <button
                         href="#"
                         onClick={handleClick}
@@ -267,67 +230,11 @@ export default function User({ userId }) {
                     </div>
                   </div>
                 </div>
-                {/* <div className="flex justify-center bottom-0 -z-1000">
-                  <div className="bg-image absolute -z-1000 bottom-0 m-auto">
-                    <img className="-z-1000" src={img3} alt="Placeholder" />
-                  </div>
-                </div> */}
               </div>
-              {/* <div className="snap-container"> */}
-              <ul ref={ref} className="lg:grid lg:grid-cols-2 gap-4">
+              <ul ref={ref} className="z-100 lg:grid lg:grid-cols-2 gap-4">
                 {posts &&
                   posts.map((post) => (
                     <li key={post._id}>
-                      {/* <div className="snap-child-s sm:snap-child-l bg-image">
-                          <div className="px-6 py-4">
-                            <div
-                              className="font-bold text-xl mb-2"
-                              onClick={() => handleReplyClick(post._id)}
-                            >
-                              {post.topic}
-                            </div>
-                            <p className="text-gray-700 text-base">
-                              {post.text}
-                            </p>
-                            {post.imageUrl && (
-                              <img
-                                src={`${post.imageUrl}`}
-                                alt="image"
-                                className="h-[150px] w-[150px] mx-auto"
-                              />
-                            )}
-                          </div>
-                          <div className="px-6 pt-4 pb-2">
-                            <button
-                              className="inline-block  bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                              onClick={() => handleReplyClick(post._id)}
-                            >
-                              {" "}
-                              Reply <sub>{post.replies.length}</sub>
-                            </button>
-                            {post.likes.indexOf(currUserId) === -1 ? (
-                              <>
-                                <button onClick={() => handleLike(post._id)}>
-                                  Likes:{" "}
-                                </button>
-                                <p className="inline"> {post.likes.length}</p>
-                              </>
-                            ) : (
-                              <>
-                                <button
-                                  className="bg-red-500 "
-                                  onClick={() => handleLike(post._id)}
-                                >
-                                  Likes:{" "}
-                                </button>
-                                <p className="inline"> {post.likes.length}</p>
-                              </>
-                            )}
-                          </div>
-                          <div className="post-time">
-                            <p>{new Date(post.createdAt).toLocaleString()}</p>
-                          </div>
-                        </div> */}
                       <Card>
                         <CardHeader>
                           <CardTitle onClick={() => handleReplyClick(post._id)}>
@@ -343,11 +250,18 @@ export default function User({ userId }) {
                         <CardFooter className="grid grid-cols-3">
                           <div className="grid grid-cols-2">
                             <button
-                              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 "
+                              className="hidden lg:inline-block  bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 "
                               onClick={() => handleReplyClick(post._id)}
                             >
                               {" "}
                               Reply <sub>{post.replies.length}</sub>
+                            </button>
+                            <button className="lg:hidden">
+                              {" "}
+                              <sub>{post.replies.length}</sub>
+                              <BiMessageAdd
+                                onClick={() => handleReplyClick(post._id)}
+                              />
                             </button>
                             {post.imageUrl && (
                               <HoverCard>
